@@ -1,13 +1,14 @@
 "use client"
 import React, {useEffect, useState} from 'react'
 import { db } from '@/app/firebase/Init';
-import { setDoc, addDoc, collection, serverTimestamp, getDoc, doc } from 'firebase/firestore';
+import { setDoc, addDoc, collection, serverTimestamp, getDoc, doc, orderBy, onSnapshot,query, deleteDoc} from 'firebase/firestore';
 // CRD no update
 
 export default function AdminPage() {
   const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
   const [keyword, setKeyword] = useState("");
   const [movies, setMovies] = useState([]);
+  const [movieList, setMovieList] = useState([]);
   const [form, setForm] = useState({
     imdbID:"",
     title:"",
@@ -41,6 +42,24 @@ export default function AdminPage() {
 
     return ()=> clearTimeout(timer);
   }, [keyword]);
+
+  useEffect(()=>{
+    const q = query(
+      collection(db, "movie-list"),
+      orderBy("lastUpdateOn", "desc")
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) =>{
+      const movies = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setMovieList(movies);
+    });
+
+    return () => unsubscribe();
+  })
 
   const handleSelectMovie = async (imdbID) =>{
     const res = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
@@ -102,6 +121,8 @@ export default function AdminPage() {
     }
   }
 
+  
+
 
   return (
     <div>
@@ -140,11 +161,20 @@ export default function AdminPage() {
       >Add New Movie</button>
       {/* Trus ada pop up dan isi disitu saja */}
       <h1 className='text-4xl'>Movie list</h1>
-      <div>
-        <h1>ini img</h1>
-        <p>Ini judul</p>
-        <p>Duration : </p>
-        <button>Remove</button>
+      <div className='grid gap-4 mt-4'>
+        {movieList.map((movie) =>(
+          <div key={movie.id} className='border p-3 rounded flex gap-3 items-center'>
+            <img src={movie.image} alt={movie.title} width={100} />
+            <div>
+              <h2 className='font-bold'>{movie.title}</h2>
+              <p>Duration : {movie.duration}</p>
+              <p>Rating : {movie.rating}</p>
+              {/* <p>Last Updated : {movie.lastUpdateOn}</p> */}
+              {/* <p>Genre : {movie.genre}</p> */}
+              <button className='bg-red-400 p-2 rounded mt-2 cursor-pointer hover:bg-red-600'>remove</button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )
