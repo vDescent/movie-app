@@ -1,6 +1,6 @@
 // import Image from "next/image";
 // ini nanti bakalan jadi home protected route user and admin only, unauth gaboleh.
-import app from "./firebase/Init";
+// import app from "./firebase/Init";
 
 
 export default function Home() {

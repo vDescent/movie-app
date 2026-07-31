@@ -59,7 +59,7 @@ export default function AdminPage() {
     });
 
     return () => unsubscribe();
-  })
+  },[])
 
   const handleSelectMovie = async (imdbID) =>{
     const res = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
@@ -121,7 +121,19 @@ export default function AdminPage() {
     }
   }
 
-  
+  const handleDeleteMovie = async (id) =>{
+    const confirmDelete = window.confirm("Delete this movie ?");
+
+    if(!confirmDelete) return;
+
+    try{
+      await deleteDoc(doc(db, "movie-list", id));
+      alert("Movie deleted successfully");
+    } catch (error){
+      console.error(error);
+      alert("Failed to delete movie");
+    }
+  }
 
 
   return (
@@ -171,7 +183,8 @@ export default function AdminPage() {
               <p>Rating : {movie.rating}</p>
               {/* <p>Last Updated : {movie.lastUpdateOn}</p> */}
               {/* <p>Genre : {movie.genre}</p> */}
-              <button className='bg-red-400 p-2 rounded mt-2 cursor-pointer hover:bg-red-600'>remove</button>
+              <button className='bg-red-400 p-2 rounded mt-2 cursor-pointer hover:bg-red-600'
+              onClick={()=> handleDeleteMovie(movie.id)}>remove</button>
             </div>
           </div>
         ))}
