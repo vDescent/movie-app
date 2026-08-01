@@ -4,11 +4,36 @@ import { db } from '@/app/firebase/Init';
 import { setDoc, addDoc, collection, serverTimestamp, getDoc, doc, orderBy, onSnapshot,query, deleteDoc} from 'firebase/firestore';
 // CRD no update
 
+interface Movie {
+  id: string;
+  imdbID: string;
+  title: string;
+  rating: string;
+  genre: string;
+  duration: string;
+  releaseYear: string;
+  actors: string;
+  plot: string;
+  image: string;
+  firstAddedOn?: any;
+  lastUpdateOn?: any;
+}
+
+interface SearchMovie {
+  imdbID: string;
+  Title: string;
+  Poster: string;
+  Year: string;
+  Type: string;
+}
+
+
+
 export default function AdminPage() {
   const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
   const [keyword, setKeyword] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [movieList, setMovieList] = useState([]);
+  const [movies, setMovies] = useState<SearchMovie[]>([]);
+  const [movieList, setMovieList] = useState<Movie[]>([]);
   const [form, setForm] = useState({
     imdbID:"",
     title:"",
@@ -45,23 +70,23 @@ export default function AdminPage() {
 
   useEffect(()=>{
     const q = query(
-      collection(db, "movie-list"),
-      orderBy("lastUpdateOn", "desc")
-    );
+    collection(db, "movie-list"),
+    orderBy("lastUpdateOn", "desc")
+  );
 
-    const unsubscribe = onSnapshot(q, (snapshot) =>{
-      const movies = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+  const unsubscribe = onSnapshot(q, (snapshot) =>{
+    const movies = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Movie, "id">),
+    }));
 
-      setMovieList(movies);
+    setMovieList(movies);
     });
 
     return () => unsubscribe();
   },[])
 
-  const handleSelectMovie = async (imdbID) =>{
+  const handleSelectMovie = async (imdbID : string) =>{
     const res = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
 
     const data = await res.json();
@@ -121,7 +146,7 @@ export default function AdminPage() {
     }
   }
 
-  const handleDeleteMovie = async (id) =>{
+  const handleDeleteMovie = async (id : string) =>{
     const confirmDelete = window.confirm("Delete this movie ?");
 
     if(!confirmDelete) return;
