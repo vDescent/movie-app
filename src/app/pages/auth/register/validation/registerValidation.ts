@@ -30,9 +30,9 @@ export function validateRegisterForm(
 
     if(form.email === ''){
         errors.email = 'This field must be filled';
-    } else if(form.name.length < 8){
-        errors.email = 'Name must be more than 8 letters';
-    } else if(form.name.includes('@')){
+    } else if(form.email.length < 8){
+        errors.email = 'Email must be more than 8 letters';
+    } else if(!form.email.includes('@')){
         errors.email = 'This section must contain @ ex: example@gmail.com'
     }
 
