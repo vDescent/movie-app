@@ -1,5 +1,3 @@
-import { error } from "console";
-
 type LoginForm = {
     email: string;
     password: string;

@@ -9,6 +9,7 @@ export function useLogin(){
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [authError, setAuthError] = useState('');
 
     const [validateErrors, setValidateErrors] = useState({
         email:'',
@@ -32,20 +33,26 @@ export function useLogin(){
         // 3. login firebase services
         try{
             setIsLoading(true);
+            setAuthError('');
             
             await loginUser({email, password});
 
             alert('Login success');
 
             router.push('/');
-        } catch (error){
-            console.error(error);
+        } catch (error: any){
+            if(error.code === 'auth/invalid-credential'){
+                setAuthError('Email atau password salah');
+            } else {
+                setAuthError('Terjadi kesalahan. Silahkan coba lagi.');
+            }
+            // console.error(error);
             
-            alert(`Error Message: ${error}`)
+            // alert(`Error Message: ${error}`)
         } finally {
             setIsLoading(false);
         }
     };
 
-    return{email, password, validateErrors, isLoading, setEmail, setPassword, handleLogin};
+    return{email, password, validateErrors, isLoading, authError, setAuthError, setEmail, setPassword, handleLogin};
 }
