@@ -25,7 +25,7 @@ export default function Home() {
   
   return (
     <ProtectedRoute>
-      <div className="flex flex-col flex-1 items-center font-sans dark:bg-background min-h-screen min-w-screen mx-10">
+      <div className="flex flex-col flex-1 items-center font-sans dark:bg-background mx-10">
         <Navbar/>
         {/* <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 dark:bg-background sm:items-start"> */}
           <p className="text-primary-text">10 Movies and pagination</p>

@@ -1,11 +1,10 @@
-import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import LogoutIcon from './icon/LogoutIcon'
 
 export default function Navbar() {
   return (
-    <div className='flex flex-row justify-between min-w-screen my-2'>
+    <div className='flex flex-row justify-between w-full my-2'>
         {/* Logo */}
         <Link href='/' className='flex flex-row items-center gap-2 ml-10'>
             <Image src="/img/movieicon.png" alt="MyMovie Logo" width={80} height={80} />
