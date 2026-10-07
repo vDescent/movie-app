@@ -33,7 +33,7 @@ export default function LoginPage() {
                             <p className='text-negative m-1'>{authError}</p>
                         )}
                     </div>
-                    <button className='bg-primary-text text-background rounded-xl font-thin w-full p-2 self-center hover:bg-background hover:cursor-pointer hover:text-primary-text disabled:opacity-50 disabled:cursor-not-allowed'
+                    <button className='bg-primary-text text-background rounded-xl border-1 border-primary-text font-thin w-full p-2 self-center hover:bg-background hover:cursor-pointer hover:border-primary-text hover:text-primary-text disabled:opacity-50 disabled:cursor-not-allowed'
                     disabled={isLoading}
                     onClick={handleLogin}>Login</button>
                     <p>Don't have account ? <Link className='text-positive-text hover:text-positive-text-hover' href='/pages/auth/register'>Go to Register Page</Link></p>

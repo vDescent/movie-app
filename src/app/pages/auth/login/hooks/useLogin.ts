@@ -37,7 +37,7 @@ export function useLogin(){
             
             await loginUser({email, password});
 
-            alert('Login success');
+            // alert('Login success');
 
             router.push('/');
         } catch (error: any){

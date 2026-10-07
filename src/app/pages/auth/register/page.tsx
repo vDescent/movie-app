@@ -2,13 +2,17 @@
 
 import Link from 'next/link';
 import { useRegister } from './hooks/useRegister';
+import CustomPopUp from '../../../components/CustomPopUp';
 
 export default function Register() {
 
-    const { name, email, password, confirmPassword, validateErrors, isLoading, setName, setEmail, setPassword, setConfirmPassword, handleRegister,} = useRegister();
+    const { name, email, password, confirmPassword, validateErrors, showSuccessPopUp, isLoading, setName, setEmail, setPassword, setConfirmPassword, setShowSuccessPopUp,handleRegister} = useRegister();
 
     return (    
         <div  className='flex justify-center items-center flex-col min-h-screen'>
+            {showSuccessPopUp &&(
+                <CustomPopUp customTitle="Alert" customInfo="Your registration is success, please login"/>
+            )}
             <div className='flex flex-col gap-4 bg-surface hover:bg-surface-hover p-10 border-primary-text border-1 rounded-xl'>
                 <h1 className='text-2xl font-bold text-primary-text self-center'>MyMovie</h1>
                 {/* <p className='text-primary-text self-center'>Collection of your favorite movie</p> */}
@@ -50,7 +54,8 @@ export default function Register() {
                     )}
                 </div>
                 <button 
-                className='bg-primary-text text-background rounded-xl font-thin w-full p-2 self-center hover:bg-background hover:cursor-pointer hover:text-primary-text'
+                className='bg-primary-text text-background rounded-xl font-thin border-1 border-background w-full p-2 self-center hover:bg-background hover:cursor-pointer hover:text-primary-text hover:border-primary-text disabled:opacity-50 disabled:cursor-not-allowed'
+                disabled={isLoading}
                 onClick={handleRegister}>Register</button>
                 <p className='text-primary-text'>Already have account ? <Link className='text-positive-text hover:text-positive-text-hover' href='/pages/auth/login'>Go to Login Page</Link></p>
             </div>

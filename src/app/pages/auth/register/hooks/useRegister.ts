@@ -9,6 +9,7 @@ export function useRegister(){
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showSuccessPopUp, setShowSuccessPopUp] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
 
     // Error state
@@ -43,7 +44,9 @@ export function useRegister(){
 
             await registerUser({name, email, password});
 
-            alert('Success, now go to login and login with your account');
+            setShowSuccessPopUp(true);
+
+            // alert('Success, now go to login and login with your account');
         } catch (error){
             console.error(error);
 
@@ -53,5 +56,5 @@ export function useRegister(){
         }
     };
 
-    return{name,email,password,confirmPassword, validateErrors, isLoading, setName, setEmail, setPassword, setConfirmPassword, handleRegister};
+    return{name,email,password,confirmPassword, validateErrors, isLoading, showSuccessPopUp, setName, setEmail, setPassword, setConfirmPassword, setShowSuccessPopUp, handleRegister};
 }
