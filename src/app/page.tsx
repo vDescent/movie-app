@@ -19,7 +19,6 @@ export default function Home() {
       console.log("Logout berhasil");
     } catch(error) {
       console.error("Logout gagal:", error);
-      
     }
   }
   
