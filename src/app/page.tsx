@@ -8,20 +8,20 @@ import { auth } from "./firebase/Init";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
+import useLogout from "./hooks/useLogout";
 
 export default function Home() {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const handleLogout = async ()=>{
-    try{
-      await signOut(auth);
-      router.replace("/pages/auth/login")
-      console.log("Logout berhasil");
-    } catch(error) {
-      console.error("Logout gagal:", error);
-    }
-  }
-  
+  // const handleLogout = async ()=>{
+  //   try{
+  //     await signOut(auth);
+  //     router.replace("/pages/auth/login")
+  //     console.log("Logout berhasil");
+  //   } catch(error) {
+  //     console.error("Logout gagal:", error);
+  //   }
+  // }
   return (
     <ProtectedRoute>
       <div className="flex flex-col flex-1 items-center font-sans dark:bg-background mx-10">
@@ -30,7 +30,7 @@ export default function Home() {
           <p className="text-primary-text">10 Movies and pagination</p>
           <p className="text-primary-text">Bulk movie via checkbox, and add to collection, then there is a modal to select what collection that user has, if user dont have collection yet in that modal user can create collection.</p>
           <p className="text-primary-text">But feature to create Collection is available either user have collection or not</p>
-          <button onClick={handleLogout} className="cursor-pointer">Logout</button>
+          <button onClick={useLogout()} className="cursor-pointer">Logout</button>
           <Link href='pages/collection/detail'>/collection/detail</Link>
           <Link href='pages/collection/list'>/collection/list</Link>
           <Link href='pages/details'>/details</Link>

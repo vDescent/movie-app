@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import LogoutIcon from './icon/LogoutIcon'
-import HandleAuthLogout from '../services/HandleAuthLogout'
+import useLogout from '../hooks/useLogout'
 
 export default function Navbar() {
+    
   return (
     <div className='flex flex-row justify-between w-full my-2'>
         {/* Logo */}
@@ -20,7 +21,7 @@ export default function Navbar() {
                 {/* <Image src="/img/logout_icon.svg" alt='Logout' width={20} height={20}/> */}
                 <Link href='/collection' className='flex flex-row gap-1 items-center text-primary-text font-medium text-xl hover:text-negative-text-hover'>
                 <LogoutIcon/>
-                <span onClick={HandleAuthLogout}>Logout</span>
+                <span onClick={useLogout()}>Logout</span>
                 </Link>
         </div>
     </div>
