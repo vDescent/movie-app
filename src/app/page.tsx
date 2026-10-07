@@ -6,6 +6,8 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase/Init";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   const router = useRouter();
@@ -23,13 +25,17 @@ export default function Home() {
   
   return (
     <ProtectedRoute>
-      <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-          <p>10 Movies and pagination</p>
-          <p>Bulk movie via checkbox, and add to collection, then there is a modal to select what collection that user has, if user dont have collection yet in that modal user can create collection.</p>
-          <p>But feature to create Collection is available either user have collection or not</p>
+      <div className="flex flex-col flex-1 items-center font-sans dark:bg-background min-h-screen min-w-screen mx-10">
+        <Navbar/>
+        {/* <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 dark:bg-background sm:items-start"> */}
+          <p className="text-primary-text">10 Movies and pagination</p>
+          <p className="text-primary-text">Bulk movie via checkbox, and add to collection, then there is a modal to select what collection that user has, if user dont have collection yet in that modal user can create collection.</p>
+          <p className="text-primary-text">But feature to create Collection is available either user have collection or not</p>
           <button onClick={handleLogout} className="cursor-pointer">Logout</button>
-        </main>
+          <Link href='pages/collection/detail'>/collection/detail</Link>
+          <Link href='pages/collection/list'>/collection/list</Link>
+          <Link href='pages/details'>/details</Link>
+        {/* </main> */}
       </div>
     </ProtectedRoute>
   );

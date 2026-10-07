@@ -5,7 +5,7 @@ export default function CustomPopUp({customTitle, customInfo}) {
     <div className="fixed inset-0 flex items-center justify-center">
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
 
       <div className="relative bg-surface border-1 border-primary-text p-4 flex flex-col items-center gap-4 m-0 rounded-xl">
         <p className="text-primary-text text-3xl font-semibold">{customTitle}</p>
