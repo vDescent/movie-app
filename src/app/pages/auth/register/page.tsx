@@ -54,7 +54,7 @@ export default function Register() {
                     )}
                 </div>
                 <button 
-                className='bg-primary-text text-background rounded-xl font-thin border-1 border-background w-full p-2 self-center hover:bg-background hover:cursor-pointer hover:text-primary-text hover:border-primary-text disabled:opacity-50 disabled:cursor-not-allowed'
+                className='bg-primary-text text-background rounded-xl font-thin w-full p-2 self-center hover:bg-accent hover:cursor-pointer hover:text-primary-text hover:border-primary-text disabled:opacity-50 disabled:cursor-not-allowed'
                 disabled={isLoading}
                 onClick={handleRegister}>Register</button>
                 <p className='text-primary-text'>Already have account ? <Link className='text-positive-text hover:text-positive-text-hover' href='/pages/auth/login'>Go to Login Page</Link></p>
