@@ -22,7 +22,7 @@ export default function FilmCard() {
             <p className="text-primary-text font-bold">9.2</p>
           </div>
         </div>
-
+ 
         <Image 
           src="https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_QL75_UY562_CR8,0,380,562_.jpg"
           alt="test picture"
