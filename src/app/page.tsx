@@ -2,13 +2,13 @@
 // import Image from "next/image";
 // ini nanti bakalan jadi home protected route user and admin only, unauth gaboleh.
 // import app from "./firebase/Init";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "@/shared/utils/ProtectedRoute";
 import Link from "next/link";
-import Navbar from "./components/Navbar";
-import useLogout from "./hooks/useLogout";
-import useUserName from "./hooks/useUsername";
-import MagnifierIcon from "./components/icon/MagnifierIcon";
-import FilmCard from "./components/FilmCard";
+import Navbar from "@/shared/components/Navbar";
+import useLogout from "@/shared/hooks/useLogout";
+import useUserName from "@/shared/hooks/useUsername";
+import MagnifierIcon from "@/shared/components/icon/MagnifierIcon";
+import FilmCard from "@/shared/components/FilmCard";
 
 export default function Home() {
   const {name, loading} = useUserName();
